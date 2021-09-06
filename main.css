@@ -1,0 +1,115 @@
+#Container{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+#Tfe{
+    margin-top: 100px;
+    width: 75%;
+    max-width: 1250px;
+    height: 650px;
+    background-color: #eee8aa;
+    border-radius: 40px;
+    padding: 25px;
+    box-shadow: 8px 10px 5px 0px rgba(0,0,0,0.75);
+}
+
+.Logo{
+    height:auto;
+    width:25%;
+    padding:15px;
+}
+
+.Name{
+    font-size: 32px;
+}
+
+.Medewerker{
+/* float:right; */
+padding: 10px;
+font-size: 20px;
+
+}
+
+
+/* Request */
+legend {
+    text-align: center
+}
+
+#Request{
+    text-align: center;
+}
+
+#Reqform{
+padding: 5px;
+}
+
+
+
+
+/* Requested */
+#RequestInfo{
+    background-color: white;
+
+}
+
+#RequestedTable{
+    border-collapse: collapse;
+    margin-left: auto;
+    margin-right: auto;
+    border: black 1px;
+    border-style: solid;
+}
+
+th {
+    padding: 2px;
+    border: 1px solid #333;
+}
+
+/* login.php */
+
+#container{
+    align-self: center;
+    text-align: center;
+    align-content: center;
+    padding: auto auto;
+    margin: auto auto;
+    height: 300px;
+    width: 300px;
+    background-color: #eee8aa;
+    border-radius: 40px;
+    padding: 25px;
+    box-shadow: 8px 10px 5px 0px rgba(0,0,0,0.75);
+}
+
+/* button */
+.mbutton{
+    margin: 5px;
+    width: 100px;
+    height: 45px;
+    border: solid black 2px;
+    background-color: antiquewhite;
+}
+
+.mbutton:hover{
+    background-color: khaki;
+}
+
+
+/* moderating page style */
+#modcontainer{
+    align-self: center;
+    text-align: center;
+    align-content: center;
+    padding: auto auto;
+    margin: auto auto;
+    height: 600px;
+    width: 1000px;
+    background-color: #eee8aa;
+    border-radius: 40px;
+    padding: 25px;
+    box-shadow: 8px 10px 5px 0px rgba(0,0,0,0.75);
+}
