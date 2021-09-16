@@ -74,6 +74,7 @@ require_once("conn.php");
                                 if(count($dbprod)==0) {
                                     echo "<option value=\"\">-----</option>";
                                 } else{
+                                    echo '<option value="all">alles</option>';
                                     foreach($dbprod as $key){
                                         echo '<option value="'.$key[0].'">'.$key[0].'</option>';
                                     } 
@@ -92,12 +93,7 @@ require_once("conn.php");
                             ?>
 
                         <br/>
-                        <caption>Locatie: 
-                            <?php
-                                if (isset($_SESSION["Locatie"])) {
-                                echo $_SESSION["Locatie"];
-                                }
-                            ?></caption>
+                        <caption>Locatie: <?php echo $_SESSION["locatie"]; ?></caption>
                 </form>
             </div>
             <!-- Info from the request -->
@@ -109,19 +105,13 @@ require_once("conn.php");
                     <th><b>Type</b></th>
                     <th><b>Fabriek</b></th>
                     <th><b>In Voorraad</b></th>
-                    <th><b>Verkoopprijs</b></th>                    
+                    <th><b>Inkoopprijs</b></th>
+                    <th><b>Verkoopprijs</b></th>
                 </tr>
                 <?php 
                     if (isset($_SESSION["sqlq"])){
-                        try {
-                            $sql=$conn->prepare($_SESSION["sqlq"]);
-                            $sql->execute();
-                            $dbitem = $sql->fetchAll();
-                                } catch(PDOException $e) {
-                                    $conn->rollBack();
-                                    echo $e->getMessage();
-                                }
-                                
+                        $dbitem = $_SESSION["sqlq"];
+
                         foreach ($dbitem as $key) {
                             echo "
                             <tr>
@@ -129,7 +119,8 @@ require_once("conn.php");
                                 <th>".$key[1]."</th>
                                 <th>".$key[2]."</th>
                                 <th>".$key[3]."</th>
-                                <th>".$key[4]."</th>                    
+                                <th>".'€'.$key[4]."</th>
+                                <th>".'€'.$key[5]."</th>               
                             </tr>";
                         }
                                 

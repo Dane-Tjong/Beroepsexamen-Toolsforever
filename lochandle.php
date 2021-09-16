@@ -48,27 +48,29 @@ if ($_POST["submit"] == "reploc"){
             $sql->bindParam(":locatie", $_POST["locatie"], PDO::PARAM_STR, 48);
             $sql->bindParam(":adres", $_POST["adres"], PDO::PARAM_STR, 48);
             $sql->bindParam(":postcode", $_POST["postcode"], PDO::PARAM_STR, 48);
-            $sql->bindParam(":id", $_POST["id"], PDO::PARAM_STR, 5);
+            $sql->bindParam(":id", $_POST["locid2"], PDO::PARAM_INT, 5);
             $sql->execute();
         } catch(PDOException $e) {
             $conn->rollBack();
             echo $e->getMessage();
         }
-        header("Location: Mod-locaties.php?locmod=2");
+        unset($_SESSION["locinfo"]);
+        header("Location: mod-locaties.php?locmod=2");
     }
 
 }
 
 if ($_POST["submit"] == "deleteloc"){
-    if ($_POST["id"] != ""){
+    if ($_POST["locid2"] != ""){
         try {
             $sql=$conn->prepare("DELETE FROM `locaties` WHERE `locaties`.`LocatieID` = :id");
-            $sql->bindParam(":id", $_POST["id"], PDO::PARAM_STR, 5);
+            $sql->bindParam(":id", $_POST["locid2"], PDO::PARAM_STR, 5);
             $sql->execute();
         } catch(PDOException $e) {
             $conn->rollBack();
             echo $e->getMessage();
         }
-        header("Location: Mod-locaties.php?locmod=3");
+        unset($_SESSION["locinfo"]);
+        header("Location: mod-locaties.php?locmod=3");
     }
 }

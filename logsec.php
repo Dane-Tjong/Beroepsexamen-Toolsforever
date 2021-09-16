@@ -1,17 +1,4 @@
-<?php session_start();
-
-$servername = "localhost";
-$dbname = "toolsforever";
-$username = "root";
-$password = "";
-$charset = "utf8mb4";
-$opt=[
-    PDO::ATTR_CASE => PDO::CASE_LOWER,
-    PDO::ATTR_EMULATE_PREPARES => TRUE,
-    PDO::ATTR_ORACLE_NULLS => PDO::NULL_EMPTY_STRING,
-    PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING
-];
-$conn = new PDO("mysql:host=$servername;dbname=$dbname;charset=$charset", $username, $password, $opt);
+<?php session_start(); require_once("conn.php");
 
 if (ISSET($_POST["uname"]) !="" ) {
 if ($_POST["pword"] !="") {
@@ -24,8 +11,8 @@ if ($_POST["pword"] !="") {
             } catch(PDOException $e) {
                 $conn->rollBack();
                 echo $e->getMessage();
-            }
-}
+        }
+    }
 }
 
 if ($_POST["uname"] == "") {
@@ -36,14 +23,13 @@ if ($_POST["uname"] == "") {
     header("Location: login.php");
 }else{
  if ($dbloc == false) {
-    header("login.php");
-//    echo "yeah";
+    header("Location: login.php");
  }else{
      if ($dbloc["username"] == $_POST["uname"] & $dbloc["pin"] == $_POST["pword"]){
         $_SESSION["username"]=$_POST["uname"];
         $_SESSION["loggedin"]= true;
         $_SESSION["dbloc"] = $dbloc;
-        $_SESSION["loggedin"] = true;
+        $_SESSION["loggedin"]= true;
         header("Location: index.php");
      }else{
         header("Location: login.php");
@@ -53,8 +39,6 @@ if ($_POST["uname"] == "") {
 
 }
 
-echo $_POST["uname"]."<br>";
-echo $_POST["pword"]."<br>";
 
 
 

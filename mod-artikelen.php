@@ -14,7 +14,7 @@
 
 <div>
     <div id="modcontainer">
-        <a href="index.php"><img src="logo.png" style="width: 250px;"></a><br/>
+        <a href="management.php"><img src="logo.png" style="width: 250px;"></a><br/>
 
         <?php
         if ($_GET["type"]==""){
@@ -27,12 +27,17 @@
             echo '
                 <form action="itmhandle.php" method="post">
                 <label for="naam">item naam:</label><br/>
-                <input type="text" id="naam" name="naam" value="'.$_POST["retnaam"].'"><br/>
+                <input type="text" id="naam" name="naam" value=""><br/>
                 <label for="type">type:</label><br/>
-                <input type="text" id="type" name="type" value="'.$_POST["rettype"].'"><br/>
+                <input type="text" id="type" name="type" value=""><br/>
                 <label for="fabrikant">fabrikant:</label><br/>
-                <input type="text" id="fabrikant" name="fabrikant" value="'.$_POST["retfabr"].'"><br/>                
-                <button name="submit" value="newitm">Submit</button>
+                <input type="text" id="fabrikant" name="fabrikant" value=""><br/>  
+                
+                <label for="inprijs">Inkoop prijs:</label><br/>
+                <input type="number" id="inprijs" name="inprijs" step="0.01" value=""><br/>  
+                <label for="uitprijs">Verkoop prijs:</label><br/>
+                <input type="number" id="uitprijs" name="uitprijs" step="0.01" value=""><br/>                
+                <button name="submit" value="newitm" style="color:green;">Submit</button>
                 </form>
                 ';
 
@@ -72,19 +77,22 @@
                 <label for="fabrikant">fabrikant:</label><br/>
                 <input type="text" id="fabrikant" name="fabrikant" value="'.$_SESSION["itminfo"]["2"].'"><br/>                
                 <input type="hidden" name="id" value="'.$_SESSION["itminfo"]["3"].'">
-                <button name="submit" value="repitm">Submit</button>
+                <label for="inkoop">Inkoop prijs:</label><br/>
+                <input type="text" id="inkoop" name="inkoop" value="'.$_SESSION["itminfo"]["4"].'"><br/> 
+                <label for="verkoop">Verkoop prijs:</label><br/>
+                <input type="text" id="verkoop" name="verkoop" value="'.$_SESSION["itminfo"]["5"].'"><br/> 
+                <button name="submit" value="repitm" style="color:green; margin-top: 7px">Submit</button>
                 <br/>
-                <br/>
-                <br/>
-                <button name="submit" value="deleteitm">verwijder artikel</button>
-                </form>
-                </div>
                 ';
 
 
-
+            if ($_SESSION["delcount"]["0"]["0"] == "0"){
+                echo '<button name="submit" value="deleteitm" style="color: darkred; margin-top: 15px;">verwijder artikel</button>';
+                }
+            echo '</form>
+                </div>
+                ';
         }
-
         if ($_GET["itmmod"]=="1"){
             echo "artikel is toegevoegd.";
         }elseif($_GET["itmmod"]=="2"){

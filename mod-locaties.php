@@ -13,7 +13,7 @@
 
 <div>
     <div id="modcontainer">
-        <a href="index.php"><img src="logo.png" style="width: 250px;"></a><br/>
+        <a href="management.php"><img src="logo.png" style="width: 250px;"></a><br/>
 
         <?php
             if ($_GET["type"]==""){
@@ -70,15 +70,31 @@
                 <input type="text" id="adres" name="adres" value="'.$_SESSION["locinfo"]["1"].'"><br/>
                 <label for="postcode">Postcode:</label><br/>
                 <input type="text" id="postcode" name="postcode" value="'.$_SESSION["locinfo"]["2"].'"><br/>                
-                <input type="hidden" name="id" value="'.$_SESSION["locinfo"]["3"].'">
-                <button name="submit" value="reploc">Submit</button>
+                <input type="hidden" name="locid2" value="'.$_SESSION["locinfo"]["3"].'">
+                <button name="submit" value="reploc" style="color: green; margin-top: 15px;">Submit</button>
                 <br/>
-                <br/>
-                <br/>
-                <button name="submit" value="deleteloc">verwijder locatie</button>
-                </form>
-                </div>
-                ';
+                <br/>';
+                if ($_SESSION["locinfo"] != "") {
+                    try {
+                        $sql = $conn->prepare("SELECT COUNT(Naam) FROM medewerkers 
+                                                        WHERE LocatieID = :lid");
+                        $sql->bindParam(":lid", $_SESSION["locinfo"][3], PDO::PARAM_INT, 5);
+                        $sql->execute();
+//                        wal = workers at location
+                        $wal = $sql->fetchall();
+//                        echo $wal[];
+                        echo "<br/>";
+
+                    } catch (PDOException $e) {
+                        $conn->rollBack();
+                        echo $e->getMessage();
+                    }
+                }
+                if ($wal[0][0] == 0) {
+                    echo '<button name="submit" value="deleteloc" style="color: darkred">verwijder locatie</button>';
+                    }
+                    echo '</form>
+                </div>';
 
 
 
